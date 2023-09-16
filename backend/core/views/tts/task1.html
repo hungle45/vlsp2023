@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>VSLP-Task1</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tts/task1">Task1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tts/task2">Task2</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="max-width: 700px;">
+        <h2 class="mt-3 text-center fw-bolder">VSLP 2023</h2>
+        <h5 class="text-secondary text-center">
+            <i>Sub-task 1 - ESS with emotion adaptation</i>
+        </h5>
+
+        <form class="mt-2 gy-3 row">
+            <div class="col-12">
+                <label for="token-input" class="form-label"><b>Access Token</b></label>
+                <input class="form-control" id="token-input" type="text" placeholder="Login to get token" required>
+            </div>
+
+            <div class="col-12 col-sm-9">
+                <label for="text-input" class="form-label"><b>Text</b></label>
+                <textarea class="form-control" id="text-input" rows="3" placeholder="Try to write something..." required
+                    >Cillum et dolore velit fugiat veniam aliqua id anim anim elit ut consectetur.</textarea>
+            </div>
+
+            <div class="col-12 col-sm-3">
+                <label for="emotion-input" class="form-label"><b>Emotion</b></label>
+                <select class="form-select" id="emotion-input" required>
+                    <option selected value=1>Neutral (1)</option>
+                    <option value=2>Angry (2)</option>
+                    <option value=3>Sad (3)</option>
+                    <option value=4>Happy (4)</option>
+                </select>
+            </div>
+
+            <div class="col-12 text-center">
+                <button id="loading-btn" class="btn btn-primary visually-hidden" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span role="status">Loading...</span>
+                </button>
+                <button type="submit" id="submit-btn" class="btn btn-primary px-2">Submit</button>
+            </div>
+        </form>
+
+        <div class="mt-3 row visually-hidden" id="result">
+            <label for="output-speech" class="col-sm-2 col-form-label position-relative">
+                <b class="position-absolute top-50 start-0 translate-middle-y">Output</b>
+            </label>
+            <div class="col-sm-10 mt-3">
+                <audio controls type="audio/wav" id='output-speech' style="width: 100%;"></audio>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        const emotionEle = document.querySelector("#emotion-input")
+        const textEle = document.querySelector('#text-input')
+        const tokenEle = document.querySelector('#token-input')
+        const form = document.querySelector('form')
+
+        document.querySelector('#submit-btn').onclick = function(event) {
+            if(form.checkValidity()) {
+                event.preventDefault()
+                toggle_submitBtn()
+                document.querySelector('#result').classList.add('visually-hidden')
+                submit_form()
+            }
+        }
+
+        function submit_form() {            
+            const body = JSON.stringify({
+                "input_text": textEle.value,
+                "emotion": emotionEle.options[emotionEle.selectedIndex].value
+            });
+            
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "", true);
+            xhr.setRequestHeader("Content-Type", "application/json;")
+            xhr.setRequestHeader("access_token", tokenEle.value)
+            xhr.onload = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText)
+                    let response = JSON.parse(xhr.responseText)
+                    document.querySelector('#output-speech').src = "data:audio/wav;base64," + encodeURI(response['result']['data'])
+                    document.querySelector('#result').classList.remove('visually-hidden')
+                } else {
+                    alert(`Error: ${xhr.statusText}`)
+                }
+                toggle_submitBtn()
+            };
+            xhr.send(body);
+        }
+
+        function toggle_submitBtn() {
+            document.querySelector('#submit-btn').classList.toggle('visually-hidden')
+            document.querySelector('#loading-btn').classList.toggle('visually-hidden')
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
