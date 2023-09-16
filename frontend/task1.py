@@ -33,7 +33,7 @@ try:
     encoded_audio = response.json()['result']['data']
     audio = base64.b64decode(encoded_audio)
     print('Synth speech successful')
-    with open('output.wav', 'wb') as f:
+    with open('./output/output_task1.wav', 'wb') as f:
         f.write(audio)
 except Exception as e:
     print(e)

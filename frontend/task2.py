@@ -5,7 +5,7 @@ import base64
 
 LOGIN_URL = 'http://127.0.0.1:5000/login'
 TASK2_URL = 'http://127.0.0.1:5000/tts/task2'
-REF_AUDIO = 'piano_c.wav'
+REF_AUDIO = 'audio_ref.wav'
 
 # login
 user_info = {
@@ -37,7 +37,7 @@ try:
     encoded_audio = response.json()['result']['data']
     audio = base64.b64decode(encoded_audio)
     print('Synth speech successful')
-    with open('output.wav', 'wb') as f:
+    with open('./output/output_task2.wav', 'wb') as f:
         f.write(audio)
 except Exception as e:
     print(e)
