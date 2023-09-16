@@ -4,15 +4,15 @@
 
 ** Create a new virtual enviroment and activate it
 
-``bash
+```bash
     python -m venv venv
     .\venv\Scipts\activate.bat
 ```
-** Install dependencies
+** Install requirements 
 
-``bash
+```bash
     pip install -r requirements.txt
-``
+```
 
 ## Demo
 
