@@ -1,16 +1,29 @@
 # vlsp2023
 
-## Demo
+## Set up
 
-**Frontend**
+** Create a new virtual enviroment and activate it
 
-```bash
-    cd frontend
-    python [task1/task2].py
+``bash
+    python -m venv venv
+    .\venv\Scipts\activate.bat
 ```
+** Install dependencies
+
+``bash
+    pip install -r requirements.txt
+``
+
+## Demo
 
 **Backend**
 ```bash
     cd backend
     python main.py
 ```
+**Frontend**
+```bash
+    cd frontend
+    python [task1/task2].py
+```
+
