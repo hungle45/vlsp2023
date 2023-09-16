@@ -2,13 +2,13 @@
 
 ## Set up
 
-** Create a new virtual enviroment and activate it
+**Create a new virtual enviroment and activate it**
 
 ```bash
     python -m venv venv
     .\venv\Scipts\activate.bat
 ```
-** Install requirements 
+**Install requirements**
 
 ```bash
     pip install -r requirements.txt
