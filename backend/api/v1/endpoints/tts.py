@@ -1,6 +1,10 @@
+import io
+import soundfile as sf
+
 from typing import Union, Annotated
 from enum import IntEnum
 import base64
+
 
 import torchaudio
 from decouple import config
@@ -41,13 +45,11 @@ async def task1(
     input_text: Annotated[str, Body()],
     emotion: Annotated[Emotions, Body()]
 ):
-    wav = tts1.syn(input_text, emotion)
-    torchaudio.save('temp/output.wav', wav.squeeze().cpu(), sample_rate=SAMPLE_RATE)
-    
-    with open('temp/output.wav', 'rb') as f:
-        audio = f.read()
-    encoded_audio = base64.b64encode(audio).decode('utf-8')
-    
+    wav, sr = tts1.syn(input_text, emotion)
+    audio_byte = io.BytesIO()
+    sf.write(audio_byte, wav, sr, format='wav', subtype='PCM_16')
+    encoded_audio = base64.b64encode(audio_byte.getbuffer()).decode('utf-8')
+
     return {
         'status': 1,
         'input': {
@@ -73,14 +75,10 @@ async def task2(
 ):
     print(ref_audio.filename)
     file_location = f'temp/{ref_audio.filename}'
-    with open(file_location, 'wb') as f:
-        f.write(ref_audio.file.read())
-    wav = tts2.syn(input_text, file_location)
-    torchaudio.save('temp/output.wav', wav.squeeze().cpu(), sample_rate=SAMPLE_RATE)
-    
-    with open('temp/output.wav', 'rb') as f:
-        audio = f.read()
-    encoded_audio = base64.b64encode(audio).decode('utf-8')
+    wav, sr = tts2.syn(input_text, file_location)
+    audio_byte = io.BytesIO()
+    sf.write(audio_byte, wav, sr, format='wav', subtype='PCM_16')
+    encoded_audio = base64.b64encode(audio_byte.getbuffer()).decode('utf-8')
     
     return {
         'status': 1,
