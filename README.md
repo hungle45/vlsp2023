@@ -2,7 +2,7 @@
 
 ## Set up
 
-**Create a new virtual enviroment and activate it**
+**Create a new virtual enviroment (Python>=3.9) and activate it**
 
 ```bash
     python -m venv venv
