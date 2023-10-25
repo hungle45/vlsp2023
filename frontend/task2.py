@@ -3,7 +3,7 @@ import json
 import base64
 
 
-LOGIN_URL = 'http://127.0.0.1:5000/login'
+LOGIN_URL = 'http://127.0.0.0:5000/login'
 TASK2_URL = 'http://127.0.0.1:5000/tts/task2'
 REF_AUDIO = 'audio_ref.wav'
 

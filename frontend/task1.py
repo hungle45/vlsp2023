@@ -3,8 +3,8 @@ import json
 import base64
 
 
-LOGIN_URL = 'http://127.0.0.1:5000/login'
-TASK1_URL = 'http://127.0.0.1:5000/tts/task1'
+LOGIN_URL = 'http://0.0.0.0:5000/login'
+TASK1_URL = 'http://0.0.0.0:5000/tts/task1'
 
 # login
 user_info = {
