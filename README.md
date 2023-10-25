@@ -6,7 +6,7 @@
 
 ```bash
     python -m venv venv
-    .\venv\Scipts\activate.bat
+    source venv/bin/activate
 ```
 **Install requirements**
 
@@ -25,5 +25,17 @@
 ```bash
     cd frontend
     python [task1/task2].py
+``` 
+
+## Docker
+**How to build docker image**
+```bash
+    docker compose up -d --build
 ```
+**How to run**
+
+```bash
+    docker image ls -a # Find the image's name
+    docker run -p 5000:5000 <IMAGE NAME>
+``` 
 
