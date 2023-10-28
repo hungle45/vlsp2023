@@ -5,5 +5,12 @@ services:
     build:
       context: .  
       dockerfile: Dockerfile
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     ports:
       - "5000:5000"

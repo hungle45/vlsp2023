@@ -1,0 +1,21 @@
+F0_path: "tts/Checkpoint/PitchExtractor/en/bst.t7"
+
+ASR_config: "tts/Checkpoint/ASR/en/config.yml"
+ASR_path: "tts/Checkpoint/ASR/en/epoch_00080.pth"
+
+HiFiGAN_config: tts/Checkpoint/HiFiGAN/en/config.json
+HiFiGAN_path: tts/Checkpoint/HiFiGAN/en/g_00750000
+
+model_path: tts/Checkpoint/StyleTTS/en/epoch_2nd_00180.pth
+
+sample_rate: 22050
+
+model_params:
+  hidden_dim: 512
+  n_token: 178
+  style_dim: 128
+  n_layer: 3
+  dim_in: 64
+  max_conv_dim: 512
+  n_mels: 80
+  dropout: 0.2

@@ -2,7 +2,7 @@
 
 ## Set up
 
-**Create a new virtual enviroment (Python>=3.9) and activate it**
+**Create a new virtual enviroment (Python>=3.10) and activate it**
 
 ```bash
     python -m venv venv
@@ -28,14 +28,12 @@
 ``` 
 
 ## Docker
-**How to build docker image**
+**Build**
 ```bash
-    docker compose up -d --build
+    docker compose build
 ```
-**How to run**
+**Run**
 
 ```bash
-    docker image ls -a # Find the image's name
-    docker run -p 5000:5000 <IMAGE NAME>
+    docker compose up -d
 ``` 
-

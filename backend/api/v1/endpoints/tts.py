@@ -14,14 +14,14 @@ from fastapi.templating import Jinja2Templates
 
 from core.schemas.users import UserSchema
 from core.dependencies import current_user_dependency
-from tts import Model1, Model2
+from tts import StyleTTSInference
 
 # load config
 SAMPLE_RATE = int(config('SAMPLE_RATE'))
+MODEL_CONFIG = str(config('MODEL_CONFIG'))
 
 # load models
-tts1 = Model1()
-tts2 = Model2()
+inference = StyleTTSInference(MODEL_CONFIG)
 
 class Emotions(IntEnum):
     NEUTRAL = 1
@@ -73,9 +73,8 @@ async def task2(
     input_text: Annotated[str, Body()],
     ref_audio: Annotated[UploadFile, File()]
 ):
-    print(ref_audio.filename)
-    file_location = f'temp/{ref_audio.filename}'
-    wav, sr = tts2.syn(input_text, file_location)
+    ref_file = ref_audio.file
+    wav, sr = inference(input_text, ref_file)
     audio_byte = io.BytesIO()
     sf.write(audio_byte, wav, sr, format='wav', subtype='PCM_16')
     encoded_audio = base64.b64encode(audio_byte.getbuffer()).decode('utf-8')

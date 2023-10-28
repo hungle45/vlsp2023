@@ -13,3 +13,10 @@ torch==2.0.1
 torchaudio==2.0.2
 soundfile==0.12.1
 requests
+phonemizer==3.2.1
+PyYAML==6.0.1
+librosa==0.10.1
+attridict==0.0.8
+pandas==2.0.3
+nltk==3.8.1
+munch==4.0.0

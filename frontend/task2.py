@@ -5,7 +5,7 @@ import base64
 
 LOGIN_URL = 'http://127.0.0.0:5000/login'
 TASK2_URL = 'http://127.0.0.1:5000/tts/task2'
-REF_AUDIO = 'audio_ref.wav'
+REF_AUDIO = 'LJ032-0264.wav'
 
 # login
 user_info = {
@@ -23,7 +23,7 @@ except:
     
 # synth speech
 input_data = {
-    "input_text": "string"
+    "input_text": "StyleTTS is a style-based generative model for parallel TTS that can synthesize diverse speech with natural prosody from a reference speech utterance."
 }
     
 files = {

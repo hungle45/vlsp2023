@@ -1,9 +1,0 @@
-fastapi==0.103.1
-pydantic==2.3.0
-uvicorn==0.23.2
-python-jose[cryptography]==3.3.0
-python-decouple==3.8
-pydantic-settings==2.0.3
-python-multipart==0.0.6
-passlib==1.7.4
-numpy
