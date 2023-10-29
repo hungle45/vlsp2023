@@ -17,7 +17,7 @@ jobs:
       run: docker login -u hungln45 -p ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
     - name: Build Docker image
-      run: docker build -t iaslab/vlsp2023:latest .
+      run: docker build -t hungln45/vlsp2023:latest .
       working-directory: .
 
     - name: Push Docker image
